@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Answer Reveal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #messageBox {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        #messageBox button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #messageBox button:hover {
+            background-color: #45a049;
+        }
+        #revealButton {
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="revealButton" onclick="showMessage()">Reveal the Answer</button>
+
+    <div id="messageBox">
+        <p id="messageText"></p>
+        <button id="nextButton" onclick="nextMessage()">Yes</button>
+    </div>
+
+    <script>
+        const messages = [
+            "Are you ready for the answer?",
+            "Are you really sure?",
+            "Like, really, really sure?",
+            "This is your final chance to back out!",
+            "Okay, here it comes...",
+            "Wait, are you absolutely certain?",
+            "The answer is: -. --- (This is some type of code)"
+        ];
+        let messageIndex = 0;
+
+        function showMessage() {
+            document.getElementById("revealButton").style.display = "none";
+            document.getElementById("messageBox").style.display = "block";
+            document.getElementById("messageText").innerText = messages[messageIndex];
+        }
+
+        function nextMessage() {
+            messageIndex++;
+            if (messageIndex < messages.length) {
+                document.getElementById("messageText").innerText = messages[messageIndex];
+
+                // Hide the button on the last message
+                if (messageIndex === messages.length - 1) {
+                    document.getElementById("nextButton").style.display = "none";
+                }
+            } else {
+                document.getElementById("messageBox").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
